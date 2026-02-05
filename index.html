@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<title>Любовно писмо ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle, #ffe6f0, #f8bbd0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Georgia', serif;
+  overflow: hidden;
+}
+
+/* ✉️ Плик */
+.envelope {
+  position: relative;
+  width: 320px;
+  height: 210px;
+  background: #f48fb1;
+  border-radius: 0 0 14px 14px;
+  cursor: pointer;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 110px solid #ec407a;
+  transform-origin: top;
+  transition: transform 1.2s ease;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* 📄 Лист */
+.letter {
+  position: absolute;
+  bottom: -260px;
+  left: 20px;
+  width: 280px;
+  height: 320px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: bottom 2s ease;
+  overflow: hidden;
+}
+
+.envelope.open .letter {
+  bottom: 20px;
+}
+
+/* ✨ Текст */
+.letter h2,
+.letter p,
+.verse {
+  opacity: 0;
+}
+
+.envelope.open h2 {
+  animation: fadeIn 1.5s forwards 1.5s;
+}
+
+.envelope.open p:nth-of-type(1) {
+  animation: fadeIn 1.5s forwards 2.5s;
+}
+
+.envelope.open p:nth-of-type(2) {
+  animation: fadeIn 1.5s forwards 3.5s;
+}
+
+.envelope.open p:nth-of-type(3) {
+  animation: fadeIn 1.5s forwards 4.5s;
+}
+
+.envelope.open .verse {
+  animation: fadeIn 2s forwards 5.5s;
+}
+
+h2 {
+  text-align: center;
+  color: #d81b60;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #444;
+  margin-top: 12px;
+}
+
+.verse {
+  margin-top: 14px;
+  font-size: 13px;
+  font-style: italic;
+  color: #6a1b9a;
+  border-top: 1px dashed #ddd;
+  padding-top: 8px;
+}
+
+/* 💕 Анимации */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* 🌸 Падащи сърца */
+.fall {
+  position: absolute;
+  top: -40px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* 👇 Подсказка */
+.hint {
+  position: absolute;
+  bottom: 30px;
+  font-size: 14px;
+  color: #6a1b9a;
+  opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openLetter()">
+  <div class="flap"></div>
+
+  <div class="letter">
+    <h2>Мила моя ❤️</h2>
+
+    <p>
+      Това писмо не е написано с мастило,<br>
+      а с благодарност и обич.
+    </p>
+
+    <p>
+      Ти си спокойствието ми,<br>
+      усмивката ми и топлината,<br>
+      която прави всичко по-смислено.
+    </p>
+
+    <p>
+      Радвам се, че те има.<br>
+      С обич — Крис 💌
+    </p>
+
+    <div class="verse">
+      „Любовта е дълготърпелива, милостива…  
+      всичко търпи, на всичко се надява.“  
+      <br>— 1 Коринтяни 13:4–7
+    </div>
+  </div>
+</div>
+
+<div class="hint">Натисни плика ✉️</div>
+
+<!-- 🎵 Музика -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f7e5a9f74.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openLetter() {
+  document.querySelector('.envelope').classList.add('open');
+  document.querySelector('.hint').style.display = 'none';
+  document.getElementById('music').play();
+}
+
+/* 🌸 Сърчица и цветя */
+const icons = ["❤️","🌸","💐","💖","🌷"];
+for(let i=0;i<30;i++){
+  const el = document.createElement("div");
+  el.className = "fall";
+  el.innerText = icons[Math.floor(Math.random()*icons.length)];
+  el.style.left = Math.random()*100 + "vw";
+  el.style.fontSize = 16 + Math.random()*20 + "px";
+  el.style.animationDuration = 6 + Math.random()*6 + "s";
+  document.body.appendChild(el);
+}
+</script>
+
+</body>
+</html>
